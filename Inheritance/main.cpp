@@ -45,7 +45,7 @@ public:
 	{
 		cout << "HDestrucror:\t" << endl;
 	}
-	void print()const
+	virtual void print()const
 	{
 		cout << last_name << " " << first_name << " " << age << " лет\n";
 	}
@@ -192,11 +192,12 @@ public:
 		cout << subject << endl;
 	}
 };
-
+//#define INHERITANCE_CHECK
 void main()
 {
-
 	setlocale(LC_ALL, "");
+#ifdef  INHERITANCE_CHECK
+	
 	Human human("Тупенко", "Василий", 18);
 	human.print();
 
@@ -208,4 +209,18 @@ void main()
 
 	Graduate graduate("Семенов", "Семен", 35, "ООП", "SPD121", 1, 100, "Делегирование конструкторов");
 	graduate.print();
+#endif // INHERITANCE_CHECK
+	Human* group[] =
+	{
+		new Student("Иванов", "Иван", 20, "ООП", "SPD121", 10, 100),
+		new Student("Смирнов", "Николай", 25, "ООП", "SPD121", 89, 65),
+		new Teacher("Петр","Петров", 50, "ООП", 20),
+		new Teacher("Давыдов","Дмитрий", 55, "ООП", 40),
+		new Graduate("Семенов", "Семен", 35, "ООП", "SPD121", 1, 100, "Делегирование конструкторов")
+	};
+	for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
+	{
+		group[i]->print();
+		cout << "\n---------------------------------\n";
+	}
 }
