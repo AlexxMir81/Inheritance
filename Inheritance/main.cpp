@@ -238,10 +238,6 @@ class HourlyEmployee : public Human
 	int hours;
 public:
 
-	const int& get_salary_per_hour()const
-	{
-		return salary;
-	}
 	const int& get_salary()const
 	{
 		return salary * hours;
