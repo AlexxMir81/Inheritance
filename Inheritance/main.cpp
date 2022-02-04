@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include<string>
 
 using namespace std;
@@ -10,6 +10,10 @@ class Human
 	std::string first_name;
 	unsigned int age;
 public:
+	virtual const int& get_salary()const
+	{
+		return 0;
+	}
 	const std::string& get_first_name()const
 	{
 		return first_name;
@@ -47,7 +51,7 @@ public:
 	}
 	virtual void print()const
 	{
-		cout << last_name << " " << first_name << " " << age << " ëåò\n";
+		cout << last_name << " " << first_name << " " << age << " Ð»ÐµÑ‚\n";
 	}
 };
 
@@ -192,35 +196,140 @@ public:
 		cout << subject << endl;
 	}
 };
+
+class PermanentEmployee : public Human
+{
+	int salary;
+public:
+	virtual const int& get_salary()const
+	{
+		return salary;
+	}
+	void set_salary(const int& salary)
+	{
+		this->salary = salary;
+	}
+	
+	PermanentEmployee
+	(
+		const std::string& last_name, const std::string& first_name, unsigned int age,
+		int salary
+	) :Human(last_name, first_name, age)
+	{
+		set_salary(salary);
+		cout << "PConstructor\t" << this << endl;
+	}
+
+	~PermanentEmployee()
+	{
+		cout << "PDestructor\t" << this << endl;
+	}
+	void print()const
+	{
+		Human::print();
+		cout << salary << endl;
+	}
+		
+};
+
+class HourlyEmployee : public Human
+{
+	int salary;
+	int hours;
+public:
+
+	const int& get_salary_per_hour()const
+	{
+		return salary;
+	}
+	const int& get_salary()const
+	{
+		return salary * hours;
+	}
+	virtual const int& get_hours()const
+	{
+		return hours;
+	}
+	void set_salary(const int& salary)
+	{
+		this->salary = salary;
+	}
+	void set_hours(const int& hours)
+	{
+		this->hours = hours;
+	}
+
+	HourlyEmployee
+	(
+		const std::string& last_name, const std::string& first_name, unsigned int age,
+		int salary, int hours
+	) :Human(last_name, first_name, age)
+	{
+		set_salary(salary);
+		set_hours(hours);
+		cout << "HConstructor" << this << endl;
+	}
+	~HourlyEmployee()
+	{
+		cout << "HDestructor" << this << endl;
+	}
+	void print()const
+	{
+		Human::print();
+		cout << salary << " " << hours << endl;
+	}
+};
 //#define INHERITANCE_CHECK
+//#define CHECK_EMPLOYEE
 void main()
 {
 	setlocale(LC_ALL, "");
 #ifdef  INHERITANCE_CHECK
 	
-	Human human("Òóïåíêî", "Âàñèëèé", 18);
+	Human human("Ð¢ÑƒÐ¿ÐµÐ½ÐºÐ¾", "Ð’Ð°ÑÐ¸Ð»Ð¸Ð¹", 18);
 	human.print();
 
-	Student student("Èâàíîâ", "Èâàí", 20, "ÎÎÏ", "SPD121", 10, 100);
+	Student student("Ð˜Ð²Ð°Ð½Ð¾Ð²", "Ð˜Ð²Ð°Ð½", 20, "ÐžÐžÐŸ", "SPD121", 10, 100);
 	student.print();
 
-	Teacher teacher("Ïåòð","Ïåòðîâ", 50, "ÎÎÏ", 20);
+	Teacher teacher("ÐŸÐµÑ‚Ñ€","ÐŸÐµÑ‚Ñ€Ð¾Ð²", 50, "ÐžÐžÐŸ", 20);
 	teacher.print();
 
-	Graduate graduate("Ñåìåíîâ", "Ñåìåí", 35, "ÎÎÏ", "SPD121", 1, 100, "Äåëåãèðîâàíèå êîíñòðóêòîðîâ");
+	Graduate graduate("Ð¡ÐµÐ¼ÐµÐ½Ð¾Ð²", "Ð¡ÐµÐ¼ÐµÐ½", 35, "ÐžÐžÐŸ", "SPD121", 1, 100, "Ð”ÐµÐ»ÐµÐ³Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ ÐºÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€Ð¾Ð²");
 	graduate.print();
 #endif // INHERITANCE_CHECK
 	Human* group[] =
 	{
-		new Student("Èâàíîâ", "Èâàí", 20, "ÎÎÏ", "SPD121", 10, 100),
-		new Student("Ñìèðíîâ", "Íèêîëàé", 25, "ÎÎÏ", "SPD121", 89, 65),
-		new Teacher("Ïåòð","Ïåòðîâ", 50, "ÎÎÏ", 20),
-		new Teacher("Äàâûäîâ","Äìèòðèé", 55, "ÎÎÏ", 40),
-		new Graduate("Ñåìåíîâ", "Ñåìåí", 35, "ÎÎÏ", "SPD121", 1, 100, "Äåëåãèðîâàíèå êîíñòðóêòîðîâ")
+		new Student("Ð˜Ð²Ð°Ð½Ð¾Ð²", "Ð˜Ð²Ð°Ð½", 20, "ÐžÐžÐŸ", "SPD121", 10, 100),
+		new Student("Ð¡Ð¼Ð¸Ñ€Ð½Ð¾Ð²", "ÐÐ¸ÐºÐ¾Ð»Ð°Ð¹", 25, "ÐžÐžÐŸ", "SPD121", 89, 65),
+		new Teacher("ÐŸÐµÑ‚Ñ€","ÐŸÐµÑ‚Ñ€Ð¾Ð²", 50, "ÐžÐžÐŸ", 20),
+		new Teacher("Ð”Ð°Ð²Ñ‹Ð´Ð¾Ð²","Ð”Ð¼Ð¸Ñ‚Ñ€Ð¸Ð¹", 55, "ÐžÐžÐŸ", 40),
+		new Graduate("Ð¡ÐµÐ¼ÐµÐ½Ð¾Ð²", "Ð¡ÐµÐ¼ÐµÐ½", 35, "ÐžÐžÐŸ", "SPD121", 1, 100, "Ð”ÐµÐ»ÐµÐ³Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ ÐºÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€Ð¾Ð²")
 	};
 	for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
 	{
 		group[i]->print();
 		cout << "\n---------------------------------\n";
 	}
+
+#ifdef CHECK_EMPLOYEE
+	PermanentEmployee Rab1("Ð˜Ð²Ð°Ð½Ð¾Ð²", "Ð˜Ð²Ð°Ð½", 20, 20000);
+	Rab1.print();
+	HourlyEmployee Rab2("Ð”Ð¼Ð¸Ñ‚Ñ€Ð¸ÐµÐ²", "Ð ÑƒÑÐ»Ð°Ð½", 26, 300, 200);
+	Rab2.print();
+#endif // CHECK_EMPLOYEE
+	Human* group2[] =
+	{
+		new PermanentEmployee("Ð¯ÐºÐ¸Ñ€", "Ð•Ð»ÐµÐ½Ð°", 40, 150000),
+		new PermanentEmployee("Ð‘ÐµÐ»Ð°Ð²Ñ†ÐµÐ²", "Ð˜Ð²Ð°Ð½", 35, 45000),
+		new HourlyEmployee("ÐšÐ°Ñ€Ð°ÑÐµÐ²Ð°", "Ð¾Ð»ÑŒÐ³Ð°", 26, 1500, 200),
+		new HourlyEmployee("ÐžÐºÑƒÐ½ÐµÐ²Ð°", "Ð›Ð°Ñ€Ð¸ÑÐ°", 28, 1200, 150),
+		new PermanentEmployee("Ð¥Ð²Ð°Ñ‚ÐºÐ¾Ð²", "ÐŸÐµÑ‚Ñ€", 38, 90000)
+	};
+	int sum_salary= 0;
+	for (int i = 0; i < sizeof(group2) / sizeof(Human*); i++)
+	{
+		sum_salary +=group2[i]->get_salary();
+	}
+	cout << "ÐžÐ±Ñ‰Ð¸Ð¹ Ð·Ð°Ñ€Ð¿Ð»Ð°Ñ‚Ð° ÑÐ¾ÑÑ‚Ð°Ð²Ð»ÑÐµÑ‚: " << sum_salary << " Ñ€ÑƒÐ±Ð»ÐµÐ¹" << endl;
 }
