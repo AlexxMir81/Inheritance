@@ -242,6 +242,10 @@ public:
 	{
 		return salary * hours;
 	}
+	const int& get_salary_per_hour()const
+	{
+		return salary;
+	}
 	virtual const int& get_hours()const
 	{
 		return hours;
@@ -313,6 +317,7 @@ void main()
 	Rab1.print();
 	HourlyEmployee Rab2("Дмитриев", "Руслан", 26, 300, 200);
 	Rab2.print();
+
 #endif // CHECK_EMPLOYEE
 	Human* group2[] =
 	{
