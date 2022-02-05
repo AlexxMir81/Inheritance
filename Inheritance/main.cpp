@@ -47,7 +47,7 @@ public:
 	}
 	~Human()
 	{
-		cout << "HDestrucror:\t" << endl;
+		cout << "HDestrucror:\t" << this << endl;
 	}
 	virtual void print()const
 	{
@@ -153,7 +153,7 @@ public:
 
 	~Teacher()
 	{
-		cout << "TDestrucror:\t" << endl;
+		cout << "TDestrucror:\t" << this << endl;
 	}
 	void print()const
 	{
@@ -267,11 +267,11 @@ public:
 	{
 		set_salary(salary);
 		set_hours(hours);
-		cout << "HConstructor" << this << endl;
+		cout << "HConstructor\t" << this << endl;
 	}
 	~HourlyEmployee()
 	{
-		cout << "HDestructor" << this << endl;
+		cout << "HDestructor\t" << this << endl;
 	}
 	void print()const
 	{
@@ -332,5 +332,5 @@ void main()
 	{
 		sum_salary +=group2[i]->get_salary();
 	}
-	cout << "Общий зарплата составляет: " << sum_salary << " рублей" << endl;
+	cout << "Общая зарплата отдела составляет: " << sum_salary << " рублей" << endl;
 }
