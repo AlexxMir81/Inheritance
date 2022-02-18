@@ -45,7 +45,7 @@ public:
 		set_age(age);
 		cout << "HConstrucror:\t" << this << endl;
 	}
-	~Human()
+	virtual ~Human()
 	{
 		cout << "HDestrucror:\t" << this << endl;
 	}
@@ -281,6 +281,7 @@ public:
 };
 //#define INHERITANCE_CHECK
 //#define CHECK_EMPLOYEE
+//#define HOMEWORK
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -311,7 +312,7 @@ void main()
 		group[i]->print();
 		cout << "\n---------------------------------\n";
 	}
-
+	delete group[];
 #ifdef CHECK_EMPLOYEE
 	PermanentEmployee Rab1("Иванов", "Иван", 20, 20000);
 	Rab1.print();
@@ -319,6 +320,7 @@ void main()
 	Rab2.print();
 
 #endif // CHECK_EMPLOYEE
+#ifdef HOMEWORK
 	Human* group2[] =
 	{
 		new PermanentEmployee("Якир", "Елена", 40, 150000),
@@ -333,4 +335,9 @@ void main()
 		sum_salary +=group2[i]->get_salary();
 	}
 	cout << "Общая зарплата отдела составляет: " << sum_salary << " рублей" << endl;
+	delete group2[];
+#endif // HOMEWORK
+
+
+
 }
